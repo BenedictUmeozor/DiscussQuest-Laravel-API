@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,8 +13,14 @@ class Answer extends Model
     use HasFactory;
 
     protected $fillable = [
+        'question_id',
         'body'
     ];
+
+    // public function scopeAll(Builder $query, $id): void
+    // {
+    //     $query->where('');
+    // }
 
     public function user(): BelongsTo
     {

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,11 +22,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::get('/users', [UserController::class, 'show']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/questions', [QuestionController::class, 'store']);
+    Route::post('answers', [AnswerController::class, 'store']);
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/questions', [QuestionController::class, 'index']);
 Route::get('/questions/{id}', [QuestionController::class, 'show']);
+Route::get('answers', [AnswerController::class, 'index']);

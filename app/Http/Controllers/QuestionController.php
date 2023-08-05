@@ -43,7 +43,6 @@ class QuestionController extends Controller
     {
         $question = Question::with('user:id,name,gender,avatar')
             ->with('category')
-            ->with('answers')
             ->withCount(['answers', 'likes'])
             ->findOrFail($id);
 

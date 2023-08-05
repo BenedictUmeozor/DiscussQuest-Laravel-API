@@ -12,7 +12,8 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        //
+        $answers = Answer::where('question_id', request('id'))->with('user')->get();
+        return $answers;
     }
 
     /**
@@ -20,7 +21,15 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            "question_id" => 'required',
+            "body" => "required|string"
+        ]);
+
+        $user = $request->user();
+
+        $answer = $user->answers()->create($validated);
+        return $answer;
     }
 
     /**
