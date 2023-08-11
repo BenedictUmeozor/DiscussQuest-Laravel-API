@@ -49,10 +49,6 @@ class UserController extends Controller
             "gender" => "required|string",
         ]);
 
-        if ($request->hasFile("avatar")) {
-            $validated['avatar'] = $request->file("avatar")->store('images');
-        }
-
         $user = $request->user();
 
         $user->update($validated);
@@ -66,5 +62,19 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function getUser($id)
+    {
+
+        $user = User::findOrFail($id);
+        $questions = $user->questions()->get();
+
+        $data = [
+            "user" => $user,
+            "questions" => $questions
+        ];
+
+        return $data;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class QuestionController extends Controller
 {
@@ -52,7 +53,7 @@ class QuestionController extends Controller
             "question" => $question,
             "answers" => $answers
         ];
-        
+
         return $response;
     }
 
@@ -67,8 +68,12 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Question $question)
+    public function destroy($id)
     {
-        //
+        $question = Question::findOrFail($id);
+
+        $question->delete();
+
+        return Response("deleted successfully");
     }
 }

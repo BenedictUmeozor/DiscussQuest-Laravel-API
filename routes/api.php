@@ -26,7 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users', [UserController::class, 'show']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/questions', [QuestionController::class, 'store']);
-    Route::post('answers', [AnswerController::class, 'store']);
+    Route::post('/answers', [AnswerController::class, 'store']);
+    Route::delete('/questions/{id}', [QuestionController::class, 'destroy']);
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);
@@ -34,3 +35,4 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/questions', [QuestionController::class, 'index']);
 Route::get('/questions/{id}', [QuestionController::class, 'show']);
 Route::get('answers', [AnswerController::class, 'index']);
+Route::get('/profile/{id}', [UserController::class, 'getUser']);
