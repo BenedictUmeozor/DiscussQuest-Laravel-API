@@ -18,6 +18,12 @@ class QuestionController extends Controller
         return $questions;
     }
 
+    public function all() {
+        $questions = Question::with('user:id,name,gender,avatar')->with('category')->withCount(['answers', 'likes'])->latest()->get();
+
+        return $questions;
+    }
+
     /**
      * Store a newly created resource in storage.
      */
