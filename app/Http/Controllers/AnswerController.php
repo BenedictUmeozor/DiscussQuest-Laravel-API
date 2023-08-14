@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class AnswerController extends Controller
 {
@@ -43,16 +44,26 @@ class AnswerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Answer $answer)
+    public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            "body" => "required|string"
+        ]);
+
+        $answer = Answer::findOrFail($id);
+
+        $answer->update($validated);
+        return $answer;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Answer $answer)
+    public function destroy($id)
     {
-        //
+        $answer = Answer::findOrFail($id);
+        $answer->delete();
+
+        return Response("Deleted successfully");
     }
 }
