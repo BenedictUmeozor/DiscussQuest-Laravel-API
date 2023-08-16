@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -39,3 +40,5 @@ Route::get("/questions/all", [QuestionController::class, 'all']);
 Route::get('/questions/{id}', [QuestionController::class, 'show']);
 Route::get('answers', [AnswerController::class, 'index']);
 Route::get('/profile/{id}', [UserController::class, 'getUser']);
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/questions/category/{id}', [QuestionController::class, 'question']);

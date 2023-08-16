@@ -12,7 +12,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::latest()->withCount(['questions'])->get();
+
+        return $categories;
     }
 
     /**

@@ -18,7 +18,8 @@ class QuestionController extends Controller
         return $questions;
     }
 
-    public function all() {
+    public function all()
+    {
         $questions = Question::with('user:id,name,gender,avatar')->with('category')->withCount(['answers', 'likes'])->latest()->get();
 
         return $questions;
@@ -61,6 +62,17 @@ class QuestionController extends Controller
         ];
 
         return $response;
+    }
+
+    public function question($id)
+    {
+        $question = Question::with('user:id,name,gender,avatar')
+            ->with('category')
+            ->withCount(['answers', 'likes'])
+            ->where('category_id', $id)
+            ->get();
+
+        return $question;
     }
 
     /**
